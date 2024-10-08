@@ -8,6 +8,9 @@ uuid_gender = "00002a8c-0000-1000-8000-00805f9b34fb"
 
 async def get_services(mac):
     async with BleakClient(mac) as client:
+
+        await client.write_gatt_char(uuid_first_name, "ITS".encode())
+        await client.write_gatt_char(uuid_last_name, "Surabaya".encode())
         
         first_name = await client.read_gatt_char(uuid_first_name)
         print("First name: " + first_name.decode("utf-8"))
